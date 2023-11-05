@@ -23,10 +23,10 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import BEAN.Grammarguideline;
 
 public class GrammarguidelinemanageDAO {
-	public static List<Grammarguideline> Displaysgrammarguidelinemanage(HttpServletRequest request, Connection conn) {
+	public static List<Grammarguideline> Displaysgrammarguidelinemanage(HttpServletRequest request, int start, int count, Connection conn) {
 		List<Grammarguideline> list = new ArrayList<Grammarguideline>();
 				
-		String sql = "select * from grammarguideline";
+		String sql = "select * from grammarguideline limit " +(start - 1)+"," + count+"";
 		try {
 			PreparedStatement ptmt = conn.prepareStatement(sql);
 			
@@ -204,5 +204,44 @@ public class GrammarguidelinemanageDAO {
 			request.setAttribute("msggrammarguidelinecontent", e.getMessage());
 		}
 		return false;
+	}
+	public static int countRow(Connection conn) {
+		int count = 0;
+		String sql = "select count(*) from grammarguideline";
+		
+		try {
+			PreparedStatement ptmt = conn.prepareStatement(sql);
+			
+			ResultSet rs = ptmt.executeQuery();
+			
+			rs.next();
+			
+			count = rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return count;
+	}
+	public static void xoaBaiHDNguPhap(Connection conn, int grammarguidelineid) {
+		String sql = "delete from grammarguideline where grammarguidelineid=" + grammarguidelineid;
+		try {
+			PreparedStatement ptmt = conn.prepareStatement(sql);
+			ptmt.executeUpdate();
+			ptmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public static void xoaMaHDNguPhapTrongCmtGrammar(Connection conn, int grammarguidelineid) {
+		String sql = "delete from cmtgrammar where grammarguidelineid=" + grammarguidelineid;
+		try {
+			PreparedStatement ptmt = conn.prepareStatement(sql);
+			ptmt.executeUpdate();
+			ptmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

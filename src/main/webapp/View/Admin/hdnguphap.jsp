@@ -76,6 +76,9 @@
 														<th class="center">
 															Thêm nội dung
 														</th>
+														<th class="center">
+															Check nội dung
+														</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -91,7 +94,7 @@
 															${list.grammarimage}
 														</td>
 														<td class="center">
-															<a class="red" href="#">
+															<a class="red" href="XoaBaiHDNguPhap?grammarguidelineid=${list.grammarguidelineid}">
 																	<i class="ace-icon fa fa-trash-o bigger-130"></i>
 															</a>
 														</td>
@@ -100,13 +103,52 @@
 																<i class="ace-icon fa fa-pencil bigger-130"></i>
 															</a>
 														</td>
+														<td class="center">
+															<ul class="list-unstyled">
+																<c:if test="${list.content != null}">
+																	<li>
+																		<i class="ace-icon fa fa-check-square-o"></i>
+																	</li>
+																</c:if>
+																<c:if test="${list.content == null}">
+																	<li>
+																		<i class="ace-icon fa fa-square-o"></i>
+																	</li>
+																</c:if>
+															</ul>
+														</td>
 													</tr>
 												</c:forEach>
 												</tbody>
 											</table>
 										</div>
 									</div>
-									
+									<div class="row">
+										<div class="col-xs-12">
+											<div>
+											<ul class="pagination">
+
+												<c:if test="${numberpage == 1}">
+												   <li class = "active"><a href = "#">Prev</a></li>
+												  
+													   <li><a href = "Listgrammarguidelinemanage?pageid=${numberpage+1}">Next</a></li>
+												   </c:if>
+												   <c:if test="${numberpage == maxpageid}">
+													   <li><a href = "Listgrammarguidelinemanage?pageid=${numberpage-1}">Prev</a></li>
+													  
+													   <li class = "active"><a href ="#">Next</a></li>
+												   </c:if>
+												   
+												   <c:if test="${numberpage > 1 && numberpage < maxpageid}">
+													   <li><a href = "Listgrammarguidelinemanage?pageid=${numberpage-1}">Prev</a></li>
+													   
+													   <li><a href = "Listgrammarguidelinemanage?pageid=${numberpage+1}">Next</a></li>
+												   </c:if>
+
+											</ul>
+										</div>
+										</div>
+									</div>
 									<div class="row">
 										<div class="col-xs-12">
 											<button type="button" class="btn btn-white btn-info btn-bold" data-toggle="modal" data-target="#myModal">

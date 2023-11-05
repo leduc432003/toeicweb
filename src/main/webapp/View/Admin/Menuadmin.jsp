@@ -51,7 +51,7 @@
 
 						<ul class="submenu">
 							<li class="">
-								<a href="Listgrammarguidelinemanage">
+								<a href="Listgrammarguidelinemanage?pageid=1">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Ngữ pháp
 								</a>
